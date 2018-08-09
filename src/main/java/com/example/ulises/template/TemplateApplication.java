@@ -16,7 +16,6 @@ public class TemplateApplication {
 	@Bean
 	public ResourceConfig jerseyConfig() {
 		final ResourceConfig resourceConfig = new ResourceConfig();
-
 		return resourceConfig;
 	}
 }
