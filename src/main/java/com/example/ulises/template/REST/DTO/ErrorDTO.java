@@ -1,4 +1,4 @@
-package com.example.ulises.template.dto;
+package com.example.ulises.template.REST.DTO;
 
 import lombok.Builder;
 import lombok.Data;
