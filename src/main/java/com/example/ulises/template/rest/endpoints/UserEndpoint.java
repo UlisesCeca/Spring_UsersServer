@@ -1,8 +1,8 @@
-package com.example.ulises.template.REST.Endpoints;
+package com.example.ulises.template.rest.endpoints;
 
-import com.example.ulises.template.REST.DTO.UserDTO;
-import com.example.ulises.template.Services.Entities.User;
-import com.example.ulises.template.Services.UserService;
+import com.example.ulises.template.rest.dto.UserDTO;
+import com.example.ulises.template.services.entities.User;
+import com.example.ulises.template.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

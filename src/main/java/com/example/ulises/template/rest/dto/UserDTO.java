@@ -1,7 +1,6 @@
-package com.example.ulises.template.REST.DTO;
+package com.example.ulises.template.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

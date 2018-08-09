@@ -1,6 +1,6 @@
-package com.example.ulises.template.Services.Repositories;
+package com.example.ulises.template.services.repositories;
 
-import com.example.ulises.template.Services.Entities.User;
+import com.example.ulises.template.services.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

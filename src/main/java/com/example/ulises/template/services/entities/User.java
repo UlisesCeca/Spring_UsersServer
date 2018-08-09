@@ -1,4 +1,4 @@
-package com.example.ulises.template.Services.Entities;
+package com.example.ulises.template.services.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
