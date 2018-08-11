@@ -1,5 +1,6 @@
 package com.example.ulises.template.rest.endpoints;
 
+import com.example.ulises.template.rest.dto.ResponseOKDTO;
 import com.example.ulises.template.rest.dto.UserDTO;
 import com.example.ulises.template.services.entities.User;
 import com.example.ulises.template.services.UserService;
@@ -15,8 +16,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static com.example.ulises.template.constants.Constants.*;
+
 @Component
-@Path("/users")
+@Path(ENDPOINT_USERS)
 public class UserEndpoint {
     @Autowired
     private ModelMapper modelMapper;
@@ -24,11 +27,11 @@ public class UserEndpoint {
     private UserService userService;
 
     @POST
-    @Path("/get")
+    @Path(ENDPOINT_USERS_GET)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hello(@Valid @NotNull(message = "testDTO must not be null") final UserDTO testDTO) {
+    public Response hello(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final UserDTO testDTO) {
         this.userService.getUser(this.modelMapper.map(testDTO, User.class));
-        return Response.noContent().build();
+        return Response.ok(ResponseOKDTO.builder().message(RESPONSE_OK_USER_CREATED).build()).build();
     }
 
 }

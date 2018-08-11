@@ -6,14 +6,14 @@ import com.example.ulises.template.services.exceptions.UserNotFoundException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class UserNotFoundExceptionMapper implements ExceptionMapper<UserNotFoundException> {
-    private final String USER_NOT_FOUND = "El usuario no ha sido encontrado";
+import static com.example.ulises.template.constants.Constants.REQUEST_ERROR_USER_DOESNT_EXOST;
 
+public class UserNotFoundExceptionMapper implements ExceptionMapper<UserNotFoundException> {
     @Override
     public Response toResponse(UserNotFoundException e) {
-        final ErrorDTO errorDTO = ErrorDTO.builder().
-                error(USER_NOT_FOUND).
-                build();
+        final ErrorDTO errorDTO = ErrorDTO.builder()
+                .message(REQUEST_ERROR_USER_DOESNT_EXOST)
+                .build();
         return Response.status(Response.Status.NOT_FOUND).entity(errorDTO).build();
     }
 }

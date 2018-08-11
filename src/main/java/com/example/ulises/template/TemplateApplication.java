@@ -1,6 +1,8 @@
 package com.example.ulises.template;
 
 import com.example.ulises.template.rest.endpoints.UserEndpoint;
+import com.example.ulises.template.rest.exceptionsmappers.InternalServerErrorMapper;
+import com.example.ulises.template.rest.exceptionsmappers.NotFoundMapper;
 import com.example.ulises.template.rest.exceptionsmappers.UserNotFoundExceptionMapper;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,8 @@ public class TemplateApplication {
 		final ResourceConfig resourceConfig = new ResourceConfig();
 		resourceConfig.register(UserEndpoint.class);
 		resourceConfig.register(UserNotFoundExceptionMapper.class);
+		resourceConfig.register(NotFoundMapper.class);
+		resourceConfig.register(InternalServerErrorMapper.class);
 		return resourceConfig;
 	}
 
