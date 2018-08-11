@@ -1,4 +1,4 @@
-package com.example.ulises.template.constants;
+package com.ulises.usersserver.constants;
 
 public class Constants {
     public static final String REQUEST_ERROR_NOT_FOUND = "This endpoint doesn't exist.";

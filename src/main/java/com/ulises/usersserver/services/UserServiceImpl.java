@@ -1,8 +1,8 @@
-package com.example.ulises.template.services;
+package com.ulises.usersserver.services;
 
-import com.example.ulises.template.services.entities.User;
-import com.example.ulises.template.services.exceptions.UserNotFoundException;
-import com.example.ulises.template.services.repositories.UserRepository;
+import com.ulises.usersserver.services.entities.User;
+import com.ulises.usersserver.services.exceptions.UserNotFoundException;
+import com.ulises.usersserver.services.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,4 +1,4 @@
-package com.example.ulises.template.configuration;
+package com.ulises.usersserver.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

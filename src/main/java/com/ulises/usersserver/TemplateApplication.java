@@ -1,9 +1,9 @@
-package com.example.ulises.template;
+package com.ulises.usersserver;
 
-import com.example.ulises.template.rest.endpoints.UserEndpoint;
-import com.example.ulises.template.rest.exceptionsmappers.InternalServerErrorMapper;
-import com.example.ulises.template.rest.exceptionsmappers.NotFoundMapper;
-import com.example.ulises.template.rest.exceptionsmappers.UserNotFoundExceptionMapper;
+import com.ulises.usersserver.rest.endpoints.UserEndpoint;
+import com.ulises.usersserver.rest.exceptionsmappers.InternalServerErrorMapper;
+import com.ulises.usersserver.rest.exceptionsmappers.NotFoundMapper;
+import com.ulises.usersserver.rest.exceptionsmappers.UserNotFoundExceptionMapper;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
