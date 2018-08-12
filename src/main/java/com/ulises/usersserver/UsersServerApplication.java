@@ -2,10 +2,6 @@ package com.ulises.usersserver;
 
 import com.ulises.usersserver.rest.endpoints.UserEndpoint;
 import com.ulises.usersserver.rest.exceptionsmappers.*;
-import com.ulises.usersserver.services.exceptions.EmailAlreadyExistsException;
-import com.ulises.usersserver.services.exceptions.PhoneAlreadyExistsException;
-import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
-import com.ulises.usersserver.services.exceptions.UserIsEmptyException;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -13,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class TemplateApplication {
+public class UsersServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TemplateApplication.class, args);
+		SpringApplication.run(UsersServerApplication.class, args);
 	}
 
 	@Bean
@@ -29,7 +25,9 @@ public class TemplateApplication {
 		resourceConfig.register(EmailAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(PhoneAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(UserAlreadyExistsExceptionMapper.class);
-		resourceConfig.register(UserIsEmptyException.class);
+		resourceConfig.register(IDAlreadyExistsExceptionMapper.class);
+		resourceConfig.register(WrongParameterExceptionMapper.class);
+		resourceConfig.register(WrongBodyExceptionMapper.class);
 		return resourceConfig;
 	}
 
