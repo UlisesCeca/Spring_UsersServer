@@ -1,6 +1,7 @@
 package com.ulises.usersserver.services.entities;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -10,7 +11,6 @@ import java.util.Date;
 public class User {
     private String username;
     private String password;
-    private String role;
     private String name;
     private String surname;
     private int age;
@@ -18,8 +18,5 @@ public class User {
     private Address address;
     private String phone;
     private String email;
-    private boolean banned;
-    private Date suspendedUntil;
-    private int suspendedTimes;
-    private App[] apps;
+    private Context context;
 }

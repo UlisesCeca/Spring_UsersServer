@@ -26,10 +26,10 @@ public class UserEndpoint {
     private UserService userService;
 
     @POST
-    @Path(Constants.ENDPOINT_USERS_GET)
+    @Path(Constants.ENDPOINT_USERS_REGISTER)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hello(@Valid @NotNull(message = Constants.REQUEST_ERROR_NULL_BODY) final UserDTO testDTO) {
-        this.userService.getUser(this.modelMapper.map(testDTO, User.class));
+    public Response register(@Valid @NotNull(message = Constants.REQUEST_ERROR_NULL_BODY) final UserDTO testDTO) {
+        this.userService.register(this.modelMapper.map(testDTO, User.class));
         return Response.ok(ResponseOKDTO.builder().message(Constants.RESPONSE_OK_USER_CREATED).build()).build();
     }
 
