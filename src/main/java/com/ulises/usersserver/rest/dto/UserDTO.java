@@ -11,15 +11,12 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
+    @NotNull(message = "internalID must not be null")
     protected String internalID;
     @NotNull(message = "username must not be null")
     protected String username;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    protected String password;
     @NotNull(message = "context must not be null")
-    protected Context context;
     protected Date creationDate;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     protected List<SimpleGrantedAuthority> role;
     /*private String id;
     private String name;
@@ -46,14 +43,6 @@ public class UserDTO {
         this.username = username;
     }
 
-    public String getPassword() {
-        return this.password;
-    }
-
-    public Context getContext() {
-        return this.context;
-    }
-
     public Date getCreationDate() {
         return this.creationDate;
     }
@@ -62,7 +51,7 @@ public class UserDTO {
         this.creationDate = creationDate;
     }
 
-    public List<SimpleGrantedAuthority> getRole() {
-        return this.role;
+    public void setRole(List<SimpleGrantedAuthority> role) {
+        this.role = role;
     }
 }

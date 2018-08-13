@@ -8,9 +8,7 @@ public class UserAppDTO extends UserDTO {
         return new ToStringBuilder(this)
                 .append("internal ID", this.internalID)
                 .append("username", this.username)
-                .append("password", this.password)
                 .append("role", this.role)
-                .append("context", this.context)
                 .append("date", this.creationDate)
                 .toString();
     }

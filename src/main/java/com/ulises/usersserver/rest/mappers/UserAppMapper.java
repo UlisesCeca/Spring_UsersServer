@@ -11,11 +11,8 @@ public class UserAppMapper {
     public UserApp map(UserAppDTO dto) {
         return UserAppBuilder.builder()
                 .username(dto.getUsername())
-                .password(dto.getPassword())
-                .context(dto.getContext())
                 .creationDate(dto.getCreationDate())
                 .internalID(dto.getInternalID())
-                .role(dto.getRole())
                 .build();
     }
 
@@ -24,6 +21,7 @@ public class UserAppMapper {
                 .username(entity.getUsername())
                 .creationDate(entity.getCreationDate())
                 .internalID(entity.getInternalID())
+                .role(entity.getRole())
                 .build();
     }
 }
