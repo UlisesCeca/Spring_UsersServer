@@ -2,6 +2,7 @@ package com.ulises.usersserver.constants;
 
 public class Constants {
     public static final String REQUEST_ERROR_NOT_FOUND = "This endpoint doesn't exist.";
+    public static final String REQUEST_ERROR_UNATHORIZED = "You are not authorized to access this content.";
     public static final String REQUEST_ERROR_INTERNAL_SERVER_ERROR = "There has been a server error and your request " +
             "couldn't be processed.";
     public static final String REQUEST_ERROR_NULL_BODY = "Request's body must not be null.";

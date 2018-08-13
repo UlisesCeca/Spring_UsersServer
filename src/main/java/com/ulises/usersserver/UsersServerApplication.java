@@ -6,10 +6,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class UsersServerApplication {
@@ -24,11 +20,14 @@ public class UsersServerApplication {
 		resourceConfig.register(UserEndpoint.class);
 		resourceConfig.register(UserNotFoundExceptionMapper.class);
 		resourceConfig.register(NotFoundMapper.class);
+		resourceConfig.register(NotAuthorizedMapper.class);
 		resourceConfig.register(InternalServerErrorMapper.class);
 		resourceConfig.register(EmailAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(PhoneAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(UserAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(IDAlreadyExistsExceptionMapper.class);
+		resourceConfig.register(ConstraintViolationMapper.class);
+
 		return resourceConfig;
 	}
 }
