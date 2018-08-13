@@ -1,10 +1,7 @@
 package com.ulises.usersserver.services.entities;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@Getter @Setter
 public class UserApp extends User {
     @Override
     public String toString() {

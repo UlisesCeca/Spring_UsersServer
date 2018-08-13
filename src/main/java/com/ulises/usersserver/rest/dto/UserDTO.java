@@ -2,21 +2,15 @@ package com.ulises.usersserver.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ulises.usersserver.services.entities.Address;
 import com.ulises.usersserver.services.entities.Context;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
-@Getter @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
-    @NotNull(message = "internalID must not be null")
     protected String internalID;
     @NotNull(message = "username must not be null")
     protected String username;
@@ -35,4 +29,40 @@ public class UserDTO {
     private Address address;
     private String phone;
     private String email;*/
+
+    public String getInternalID() {
+        return this.internalID;
+    }
+
+    public void setInternalID(String internalID) {
+        this.internalID = internalID;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public Context getContext() {
+        return this.context;
+    }
+
+    public Date getCreationDate() {
+        return this.creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<SimpleGrantedAuthority> getRole() {
+        return this.role;
+    }
 }

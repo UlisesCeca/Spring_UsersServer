@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
 
 @Service
@@ -21,12 +23,10 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public void register(UserApp user) {
-        String internalId = user.getUsername() + USERNAME_CONTEXT_KEY + user.getContext().getName();
-
-        if(this.userRepository.existsById(internalId))
+        if(this.userRepository.existsById(user.getInternalID()))
             throw new UserAlreadyExistsException();
         else {
-            user.setInternalID(internalId);
+            user.setInternalID();
             user.setPassword(this.passwordEncoder.encode(user.getPassword()));
             this.userRepository.insert(user);
         }
