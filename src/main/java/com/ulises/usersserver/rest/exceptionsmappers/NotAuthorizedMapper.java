@@ -13,7 +13,6 @@ import static com.ulises.usersserver.constants.Constants.REQUEST_ERROR_UNATHORIZ
 public class NotAuthorizedMapper implements ExceptionMapper<NotAuthorizedException> {
     @Override
     public Response toResponse(NotAuthorizedException e) {
-        System.out.println("EEEEEEEEEEEEEEEEEE");
         final ErrorDTO errorDTO = ErrorDTOBuilder.builder()
                 .message(REQUEST_ERROR_UNATHORIZED)
                 .build();
