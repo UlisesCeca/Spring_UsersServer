@@ -1,9 +1,9 @@
 package com.ulises.usersserver.rest.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder @Data
+@Getter @Setter
 public class ErrorDTO {
-    private final String message;
+    private String message;
 }

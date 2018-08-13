@@ -7,16 +7,12 @@ public class Constants {
     public static final String REQUEST_ERROR_NULL_BODY = "Request's body must not be null.";
     public static final String RESPONSE_OK_USER_CREATED = "Your user has been created successfully.";
     public static final String ENDPOINT_USERS = "/users";
-    public static final String ENDPOINT_USERS_REGISTER = "/register";
+    public static final String ENDPOINT_USERS_REGISTER_APP = "/register/app";
     public static final String REQUEST_ERROR_USER_DOESNT_EXIST = "Your information to enter is incorrect. Please, try " +
             "again.";
     public static final String REQUEST_ERROR_EMAIL_ALREADY_EXISTS = "There is someone registered with this email already.";
     public static final String REQUEST_ERROR_PHONE_ALREADY_EXISTS = "There is someone registered with this phone already.";
     public static final String REQUEST_ERROR_USER_ALREADY_EXISTS = "There is someone registered with this username already.";
     public static final String REQUEST_ERROR_USER_ID_EXISTS = "There is someone registered with this ID already.";
-    public static final String REQUEST_ERROR_BAD_REQUEST_PARAMETERS = "Request's parameters are wrong or missing.";
-    public static final String REQUEST_ERROR_BAD_REQUEST_BODY = "Request's body is wrong or missing.";
-    public enum REGISTRATION_TYPE {
-        USERNAME, EMAIL, ID, PHONE
-    }
+    public static final String USERNAME_CONTEXT_KEY = "@@@uli";
 }

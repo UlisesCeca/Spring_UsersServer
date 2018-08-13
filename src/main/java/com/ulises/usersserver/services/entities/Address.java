@@ -1,8 +1,10 @@
 package com.ulises.usersserver.services.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Address {
     private String country;
     private String zipCode;
