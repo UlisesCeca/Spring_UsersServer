@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.ulises.usersserver.constants.Constants.ENDPOINT_USERS_REGISTER_APP;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -21,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().anyRequest().hasRole("ULIAPP")
+                .authorizeRequests().antMatchers(ENDPOINT_USERS_REGISTER_APP).hasRole("ULIAPP")
                 .and().httpBasic()
                 .and().sessionManagement().disable();
     }
