@@ -1,8 +1,6 @@
 package com.ulises.usersserver.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ulises.usersserver.services.entities.Context;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.validation.constraints.NotNull;
@@ -15,7 +13,6 @@ public class UserDTO {
     protected String internalID;
     @NotNull(message = "username must not be null")
     protected String username;
-    @NotNull(message = "context must not be null")
     protected Date creationDate;
     protected List<SimpleGrantedAuthority> role;
     /*private String id;

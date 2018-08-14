@@ -15,6 +15,8 @@ public class UserNotFoundExceptionMapper implements ExceptionMapper<UserNotFound
         final ErrorDTO errorDTO = ErrorDTOBuilder.builder()
                 .message(REQUEST_ERROR_USER_DOESNT_EXIST)
                 .build();
-        return Response.status(Response.Status.NOT_FOUND).entity(errorDTO).build();
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(errorDTO)
+                .build();
     }
 }

@@ -4,7 +4,7 @@ import com.ulises.usersserver.constants.Constants;
 import com.ulises.usersserver.rest.dto.ResponseOKDTOBuilder;
 import com.ulises.usersserver.rest.dto.UserAppDTO;
 import com.ulises.usersserver.rest.mappers.UserAppMapper;
-import com.ulises.usersserver.services.UserService;
+import com.ulises.usersserver.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import static com.ulises.usersserver.constants.Constants.*;
 @Path(Constants.ENDPOINT_USERS)
 public class UserEndpoint {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Autowired
     private UserAppMapper userMapper;
 

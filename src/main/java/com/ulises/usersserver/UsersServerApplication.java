@@ -20,7 +20,6 @@ public class UsersServerApplication {
 		resourceConfig.register(UserEndpoint.class);
 		resourceConfig.register(UserNotFoundExceptionMapper.class);
 		resourceConfig.register(NotFoundMapper.class);
-		resourceConfig.register(NotAuthorizedMapper.class);
 		resourceConfig.register(InternalServerErrorMapper.class);
 		resourceConfig.register(EmailAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(PhoneAlreadyExistsExceptionMapper.class);

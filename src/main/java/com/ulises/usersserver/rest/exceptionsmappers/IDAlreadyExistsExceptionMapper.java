@@ -15,6 +15,8 @@ public class IDAlreadyExistsExceptionMapper implements ExceptionMapper<IDAlready
         final ErrorDTO errorDTO = ErrorDTOBuilder.builder()
                 .message(REQUEST_ERROR_USER_ID_EXISTS)
                 .build();
-        return Response.status(Response.Status.BAD_REQUEST).entity(errorDTO).build();
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(errorDTO)
+                .build();
     }
 }

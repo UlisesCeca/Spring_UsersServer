@@ -9,14 +9,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 public class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException> {
-
     @Override
     public Response toResponse(final ConstraintViolationException exception) {
         final ErrorDTOBuilder builder = ErrorDTOBuilder.builder();
+        final ErrorDTO errorDTO;
         for (ConstraintViolation constraintViolation : exception.getConstraintViolations()) {
-            builder.message(constraintViolation.getMessage());
+            builder.addMessage(constraintViolation.getMessage());
         }
-        final ErrorDTO errorDTO = builder.build();
-        return Response.status(Response.Status.BAD_REQUEST).entity(errorDTO).build();
+        errorDTO = builder.build();
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(errorDTO)
+                .build();
     }
 }

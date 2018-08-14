@@ -2,7 +2,8 @@ package com.ulises.usersserver.constants;
 
 public class Constants {
     public static final String REQUEST_ERROR_NOT_FOUND = "This endpoint doesn't exist.";
-    public static final String REQUEST_ERROR_UNATHORIZED = "You are not authorized to access this content.";
+    public static final String REQUEST_ERROR_UNATHORIZED = "You are not authorized to view this section. Please," +
+            " enter with an authorized account.";
     public static final String REQUEST_ERROR_INTERNAL_SERVER_ERROR = "There has been a server error and your request " +
             "couldn't be processed.";
     public static final String REQUEST_ERROR_NULL_BODY = "Request's body must not be null.";
@@ -16,4 +17,7 @@ public class Constants {
     public static final String REQUEST_ERROR_USER_ALREADY_EXISTS = "There is someone registered with this username already.";
     public static final String REQUEST_ERROR_USER_ID_EXISTS = "There is someone registered with this ID already.";
     public static final String USERNAME_CONTEXT_KEY = "____@@123_d_www!!_ee2_E2-CON!!!!";
+    public enum ROLES {
+        ULIAPP
+    }
 }

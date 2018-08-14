@@ -1,6 +1,8 @@
 package com.ulises.usersserver.configuration;
 
-import com.ulises.usersserver.services.UserService;
+import com.ulises.usersserver.constants.Constants;
+import com.ulises.usersserver.rest.exceptionsmappers.NotAuthorizedExceptionMapper;
+import com.ulises.usersserver.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,14 +19,15 @@ import static com.ulises.usersserver.constants.Constants.ENDPOINT_USERS_REGISTER
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers(ENDPOINT_USERS_REGISTER_APP).hasRole("ULIAPP")
-                .and().httpBasic()
+                .authorizeRequests()
+                .antMatchers(ENDPOINT_USERS_REGISTER_APP).hasRole(Constants.ROLES.ULIAPP.toString())
+                .and().httpBasic().authenticationEntryPoint(new NotAuthorizedExceptionMapper())
                 .and().sessionManagement().disable();
     }
 
@@ -37,4 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
+
