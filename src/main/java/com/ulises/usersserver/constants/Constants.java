@@ -14,6 +14,7 @@ public class Constants {
             "again.";
     public static final String REQUEST_ERROR_EMAIL_ALREADY_EXISTS = "There is someone registered with this email already.";
     public static final String REQUEST_ERROR_PHONE_ALREADY_EXISTS = "There is someone registered with this phone already.";
+    public static final String REQUEST_ERROR_PASSWORDS_DONT_MATCH = "The introduced passwords don't match.";
     public static final String REQUEST_ERROR_USER_ALREADY_EXISTS = "There is someone registered with this username already.";
     public static final String REQUEST_ERROR_USER_ID_EXISTS = "There is someone registered with this ID already.";
     public static final String USERNAME_CONTEXT_KEY = "____@@123_d_www!!_ee2_E2-CON!!!!";

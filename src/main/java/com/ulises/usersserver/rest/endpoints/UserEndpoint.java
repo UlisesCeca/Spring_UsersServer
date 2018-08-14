@@ -1,11 +1,10 @@
 package com.ulises.usersserver.rest.endpoints;
 
 import com.ulises.usersserver.constants.Constants;
-import com.ulises.usersserver.rest.dto.ResponseOKDTOBuilder;
-import com.ulises.usersserver.rest.dto.UserAppDTO;
 import com.ulises.usersserver.rest.forms.RegistrationAppForm;
 import com.ulises.usersserver.rest.mappers.UserAppMapper;
 import com.ulises.usersserver.services.UserServiceImpl;
+import com.ulises.usersserver.services.exceptions.PasswordsDontMatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,9 @@ public class UserEndpoint {
     @POST
     @Path(ENDPOINT_USERS_REGISTER_APP)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final RegistrationAppForm registrationAppForm) {
+    public Response registerApp(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final RegistrationAppForm registrationAppForm) {
+        if(!registrationAppForm.getPassword().equals(registrationAppForm.getPasswordCheck()))
+            throw new PasswordsDontMatchException();
         return Response.ok(this.userMapper.map(this.userService.register(this.userMapper.map(registrationAppForm)))).build();
     }
 }

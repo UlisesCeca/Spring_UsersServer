@@ -26,6 +26,7 @@ public class UsersServerApplication {
 		resourceConfig.register(UserAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(IDAlreadyExistsExceptionMapper.class);
 		resourceConfig.register(ConstraintViolationMapper.class);
+		resourceConfig.register(PasswordsDontMatchExceptionMapper.class);
 
 		return resourceConfig;
 	}
