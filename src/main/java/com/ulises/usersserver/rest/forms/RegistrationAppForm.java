@@ -12,12 +12,10 @@ public class RegistrationAppForm {
     private String username;
 
     @NotNull(message = "password must not be null")
-    @Length(min=5, max=20, message = "password's length must be 5-15 characters long")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @NotNull(message = "password must not be null")
-    @Length(min=5, max=20, message = "password's length must be 5-15 characters long")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String passwordCheck;
 
