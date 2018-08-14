@@ -3,6 +3,7 @@ package com.ulises.usersserver.rest.endpoints;
 import com.ulises.usersserver.constants.Constants;
 import com.ulises.usersserver.rest.dto.ResponseOKDTOBuilder;
 import com.ulises.usersserver.rest.dto.UserAppDTO;
+import com.ulises.usersserver.rest.forms.RegistrationAppForm;
 import com.ulises.usersserver.rest.mappers.UserAppMapper;
 import com.ulises.usersserver.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,7 @@ public class UserEndpoint {
     @POST
     @Path(ENDPOINT_USERS_REGISTER_APP)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final UserAppDTO userAppDTO) {
-        this.userService.register(this.userMapper.map(userAppDTO));
-        return Response.ok(ResponseOKDTOBuilder.builder().message(RESPONSE_OK_USER_CREATED).build()).build();
+    public Response register(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final RegistrationAppForm registrationAppForm) {
+        return Response.ok(this.userMapper.map(this.userService.register(this.userMapper.map(registrationAppForm)))).build();
     }
 }

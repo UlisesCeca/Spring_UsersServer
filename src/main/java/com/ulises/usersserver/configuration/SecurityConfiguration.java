@@ -26,7 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(ENDPOINT_USERS_REGISTER_APP).hasRole(Constants.ROLES.ULIAPP.toString())
+                .antMatchers(ENDPOINT_USERS_REGISTER_APP).hasAnyRole(Constants.ROLES.ULIAPP.toString(),
+                    Constants.ROLES.ULISES.toString())
                 .and().httpBasic().authenticationEntryPoint(new NotAuthorizedExceptionMapper())
                 .and().sessionManagement().disable();
     }

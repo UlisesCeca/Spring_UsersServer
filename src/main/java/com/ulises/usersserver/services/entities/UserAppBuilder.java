@@ -1,13 +1,17 @@
 package com.ulises.usersserver.services.entities;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.Date;
+import java.util.List;
 
 public class UserAppBuilder {
     private String username;
     private Date creationDate;
-    protected String internalID;
-    protected String password;
-    protected Context context;
+    private String internalID;
+    private String password;
+    private Context context;
+    protected List<SimpleGrantedAuthority> role;
 
     public static UserAppBuilder builder() {
         return new UserAppBuilder();
@@ -23,7 +27,12 @@ public class UserAppBuilder {
         return this;
     }
 
-    public UserAppBuilder username(final Context context) {
+    public UserAppBuilder role(final List<SimpleGrantedAuthority> role) {
+        this.role = role;
+        return this;
+    }
+
+    public UserAppBuilder context(final Context context) {
         this.context = context;
         return this;
     }
@@ -39,6 +48,8 @@ public class UserAppBuilder {
         return this;
     }
 
+
+
     public UserApp build() {
         final UserApp userApp = new UserApp();
         userApp.setInternalID(this.internalID);
@@ -46,6 +57,7 @@ public class UserAppBuilder {
         userApp.setCreationDate(this.creationDate);
         userApp.setPassword(this.password);
         userApp.setContext(this.context);
+        userApp.setRole(this.role);
         return userApp;
     }
 }

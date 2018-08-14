@@ -7,7 +7,6 @@ import com.ulises.usersserver.services.exceptions.UserNotFoundException;
 import com.ulises.usersserver.services.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,18 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
-    public void register(UserApp user) {
+    public UserApp register(UserApp user) {
         if(this.userRepository.existsById(user.getInternalID()))
             throw new UserAlreadyExistsException();
-        else {
-            user.setInternalID();
-            user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        else
             this.userRepository.insert(user);
-        }
+        return user;
     }
 
     @Override
@@ -35,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
         if(user == null)
             throw new UserNotFoundException();
-
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getRole());
     }

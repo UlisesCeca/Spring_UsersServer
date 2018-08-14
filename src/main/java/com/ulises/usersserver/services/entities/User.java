@@ -68,6 +68,10 @@ public class User {
         this.context = context;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public Date getCreationDate() {
         return this.creationDate;
     }

@@ -1,6 +1,9 @@
 package com.ulises.usersserver.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ResponseOKDTO {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String message;
 
     public String getMessage() {

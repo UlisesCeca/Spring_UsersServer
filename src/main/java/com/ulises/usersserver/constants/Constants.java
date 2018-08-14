@@ -17,7 +17,11 @@ public class Constants {
     public static final String REQUEST_ERROR_USER_ALREADY_EXISTS = "There is someone registered with this username already.";
     public static final String REQUEST_ERROR_USER_ID_EXISTS = "There is someone registered with this ID already.";
     public static final String USERNAME_CONTEXT_KEY = "____@@123_d_www!!_ee2_E2-CON!!!!";
+    public static final String ROLE_PREFIX = "ROLE_";
     public enum ROLES {
+        ULIAPP, ULISES
+    }
+    public enum CONTEXTS {
         ULIAPP
     }
 }
