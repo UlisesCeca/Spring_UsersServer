@@ -2,26 +2,22 @@ package com.ulises.usersserver.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ulises.usersserver.services.entities.Context;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
-    @NotNull(message = "username must not be null")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String username;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    protected Date creationDate;
+    private Date creationDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    protected List<SimpleGrantedAuthority> role;
+    private List<SimpleGrantedAuthority> role;
 
-    @NotNull(message = "context must not be null")
-    protected Context context;
     /*private String id;
     private String name;
     private String surname;
@@ -51,17 +47,8 @@ public class UserDTO {
         this.role = role;
     }
 
-
     public List<SimpleGrantedAuthority> getRole() {
         return role;
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 
 }

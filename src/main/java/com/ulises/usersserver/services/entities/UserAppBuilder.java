@@ -11,7 +11,8 @@ public class UserAppBuilder {
     private String internalID;
     private String password;
     private Context context;
-    protected List<SimpleGrantedAuthority> role;
+    private List<SimpleGrantedAuthority> role;
+    private String email;
 
     public static UserAppBuilder builder() {
         return new UserAppBuilder();
@@ -24,6 +25,11 @@ public class UserAppBuilder {
 
     public UserAppBuilder password(final String password) {
         this.password = password;
+        return this;
+    }
+
+    public UserAppBuilder email(final String email) {
+        this.email = email;
         return this;
     }
 
@@ -58,6 +64,7 @@ public class UserAppBuilder {
         userApp.setPassword(this.password);
         userApp.setContext(this.context);
         userApp.setRole(this.role);
+        userApp.setEmail(this.email);
         return userApp;
     }
 }

@@ -1,6 +1,5 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
-import com.ulises.usersserver.rest.dto.ErrorDTO;
 import com.ulises.usersserver.rest.dto.ErrorDTOBuilder;
 import org.json.JSONObject;
 import org.springframework.security.core.AuthenticationException;

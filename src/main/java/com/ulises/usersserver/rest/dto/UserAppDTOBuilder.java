@@ -1,6 +1,5 @@
 package com.ulises.usersserver.rest.dto;
 
-import com.ulises.usersserver.services.entities.Context;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Date;
@@ -8,9 +7,9 @@ import java.util.List;
 
 public class UserAppDTOBuilder {
     private String username;
-    private Context context;
-    protected List<SimpleGrantedAuthority> role;
-    protected Date creationDate;
+    private List<SimpleGrantedAuthority> role;
+    private Date creationDate;
+    private String email;
 
     public static UserAppDTOBuilder builder() {
     return new UserAppDTOBuilder();
@@ -21,14 +20,14 @@ public class UserAppDTOBuilder {
         return this;
     }
 
-
-    public UserAppDTOBuilder creationDate(final Date creationDate) {
-        this.creationDate = creationDate;
+    public UserAppDTOBuilder email(final String email) {
+        this.email = email;
         return this;
     }
 
-    public UserAppDTOBuilder context(final Context context) {
-        this.context = context;
+
+    public UserAppDTOBuilder creationDate(final Date creationDate) {
+        this.creationDate = creationDate;
         return this;
     }
 
@@ -41,9 +40,9 @@ public class UserAppDTOBuilder {
     public UserAppDTO build() {
         final UserAppDTO userAppDTO = new UserAppDTO();
         userAppDTO.setUsername(this.username);
-        userAppDTO.setContext(this.context);
         userAppDTO.setRole(this.role);
         userAppDTO.setCreationDate(this.creationDate);
+        userAppDTO.setEmail(this.email);
         return userAppDTO;
     }
 }
