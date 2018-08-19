@@ -8,7 +8,6 @@ public class Constants {
             "couldn't be processed.";
     public static final String REQUEST_ERROR_NULL_BODY = "Request's body must not be null.";
     public static final String REQUEST_ERROR_USER_NOT_FOUND_WITH_EMAIL = "There is not any user with this email.";
-    public static final String RESPONSE_OK_USER_CREATED = "Your user has been created successfully.";
     public static final String ENDPOINT_USERS = "/users";
     public static final String ENDPOINT_USERS_REGISTER_APP = "/register/app";
     public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL = "/recoverpasswordbyemail";
@@ -27,6 +26,19 @@ public class Constants {
     public enum CONTEXTS {
         ULIAPP
     }
-    public static final String PASSWORD_RECOVERY_EMAIL = "";
+    public static final String PASSWORD_RECOVERY_EMAIL_BODY = "" +
+            "<html>" +
+            "   <body>" +
+            "       <center>" +
+            "           Hello [USERNAME], you are receiving this email because a password recovery for the account " +
+            "           registered with this email at [CONTEXT] has been " +
+            "           requested. <br><br>To recover your password click on the button below to create a new one." +
+            "           <br><br>" +
+            "           If you haven't requested any password recovery you can just ignore this email." +
+            "           <br><br>" +
+            "           <button type=\"button\">Recover Password</button>" +
+            "       </center>" +
+            "   </body>" +
+            "</html>";
     public static final String ENDPOINT_RECOVER_PASSWORD = "http://localhost:8681/ulises/notificationsserver/notifications/email";
 }

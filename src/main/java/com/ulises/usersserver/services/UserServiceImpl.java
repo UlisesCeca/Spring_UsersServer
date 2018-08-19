@@ -9,17 +9,19 @@ import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
 import com.ulises.usersserver.services.repositories.UserAppRepository;
 import com.ulises.usersserver.services.repositories.UserRepository;
 import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.ws.rs.InternalServerErrorException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static com.ulises.usersserver.constants.Constants.ENDPOINT_RECOVER_PASSWORD;
+import static com.ulises.usersserver.constants.Constants.PASSWORD_RECOVERY_EMAIL_BODY;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,19 +45,26 @@ public class UserServiceImpl implements UserService {
     public void recoverPasswordByEmail(final UserApp user) {
         Email email;
         HttpHeaders headers;
-        int responseCode;
+        String body;
 
         if(!this.userAppRepository.existsByUsernameAndContextAndEmail(user.getUsername(), user.getContext(), user.getEmail()))
             throw new NoUserWithEmailException();
 
+        try {
+            body = new String(Files.readAllBytes(Paths.get("assets/passwordrecoveryemail.html")));
+        } catch (IOException e) {
+            throw new InternalServerErrorException();
+        }
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         email = EmailBuilder.builder()
                 .to(user.getEmail())
-                .from("Ulises Ceca <ulises@ulisesceca.com>")
+                .from(user.getContext().getName() + " <no-reply@" + user.getContext().getName().toLowerCase() + ".com>")
                 .context(user.getContext())
-                .body("Prueba")
-                .subject("Prueba")
+                .body(body
+                        .replace("[USERNAME]", user.getUsername())
+                        .replace("[CONTEXT]", user.getContext().getName()))
+                .subject("Password Recovery - " + user.getContext().getName())
                 .build();
 
         if(!this.httpService.checkStatusIsOK(this.httpService.post(ENDPOINT_RECOVER_PASSWORD, email, headers, null).getStatus()))
