@@ -8,19 +8,19 @@ import java.util.Random;
 
 public class PasswordRecoveryToken {
     @Id
-    private String user;
+    private String username;
 
     @Indexed(name="expiration", expireAfterSeconds=300)
     private final Date expiration = new Date();
 
     private final String token =  Integer.toString(new Random().nextInt((999999 - 100000) + 1) + 100000);
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getExpiration() {
