@@ -11,7 +11,7 @@ public class Constants {
     public static final String ENDPOINT_USERS = "/users";
     public static final String ENDPOINT_USERS_REGISTER_APP = "/register/app";
     public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL = "/recoverpasswordbyemail";
-    public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_ENTER = "/recoverpasswordbyemailnew";
+    public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_ENTER = "/recoverpasswordfinal";
     public static final String REQUEST_ERROR_USER_DOESNT_EXIST = "Your information to enter is incorrect. Please, try " +
             "again.";
     public static final String REQUEST_ERROR_EMAIL_ALREADY_EXISTS = "There is someone registered with this email already.";

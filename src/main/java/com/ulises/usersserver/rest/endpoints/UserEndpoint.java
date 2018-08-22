@@ -1,8 +1,10 @@
 package com.ulises.usersserver.rest.endpoints;
 
 import com.ulises.usersserver.constants.Constants;
+import com.ulises.usersserver.rest.forms.PasswordEmailRecoveryFinalForm;
 import com.ulises.usersserver.rest.forms.PasswordEmailRecoveryForm;
 import com.ulises.usersserver.rest.forms.RegistrationAppForm;
+import com.ulises.usersserver.rest.mappers.PasswordRecoveryTokenMapper;
 import com.ulises.usersserver.rest.mappers.UserAppMapper;
 import com.ulises.usersserver.services.UserServiceImpl;
 import com.ulises.usersserver.services.exceptions.PasswordsDontMatchException;
@@ -19,8 +21,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.util.Base64;
-
 import static com.ulises.usersserver.constants.Constants.*;
 
 
@@ -31,6 +31,8 @@ public class UserEndpoint {
     private UserServiceImpl userService;
     @Autowired
     private UserAppMapper userMapper;
+    @Autowired
+    private PasswordRecoveryTokenMapper passwordRecoveryTokenMapper;
 
     @POST
     @Path(ENDPOINT_USERS_REGISTER_APP)
@@ -58,8 +60,8 @@ public class UserEndpoint {
     @POST
     @Path(ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_ENTER)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response recoverPasswordByEmailEnter(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final PasswordEmailRecoveryForm form) {
-        this.userService.recoverPasswordByEmail(this.userMapper.map(form));
+    public Response recoverPasswordFinal(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final PasswordEmailRecoveryFinalForm form) {
+        this.userService.recoverPasswordFinal(this.passwordRecoveryTokenMapper.map(form));
         return Response.noContent().build();
     }
 }

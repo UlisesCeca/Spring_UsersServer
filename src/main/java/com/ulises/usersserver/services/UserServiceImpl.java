@@ -3,6 +3,8 @@ package com.ulises.usersserver.services;
 import com.ulises.usersserver.repositories.PasswordRecoveryTokensRepository;
 import com.ulises.usersserver.services.entities.*;
 import com.ulises.usersserver.services.exceptions.NoUserWithEmailException;
+import com.ulises.usersserver.services.exceptions.TokenExpiredException;
+import com.ulises.usersserver.services.exceptions.TokenNotMatchException;
 import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
 import com.ulises.usersserver.repositories.UserAppRepository;
 import com.ulises.usersserver.repositories.UserRepository;
@@ -76,6 +78,17 @@ public class UserServiceImpl implements UserService {
                     .token(Integer.toString(new Random().nextInt((999999 - 100000) + 1) + 100000))
                     .build()
             );
+    }
+
+    @Override
+    public void recoverPasswordFinal(final PasswordRecoveryToken passwordRecoveryToken) {
+        PasswordRecoveryToken token = this.passwordRecoveryTokensRepository.findById(passwordRecoveryToken.getUsername())
+                .orElseThrow(TokenExpiredException::new);
+
+        if(token.getToken().equalsIgnoreCase(passwordRecoveryToken.getToken()))
+            this.passwordRecoveryTokensRepository.delete(token);
+        else
+            throw new TokenNotMatchException();
     }
 
 
