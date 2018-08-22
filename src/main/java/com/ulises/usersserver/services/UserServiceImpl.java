@@ -1,13 +1,11 @@
 package com.ulises.usersserver.services;
 
-import com.ulises.usersserver.services.entities.Email;
-import com.ulises.usersserver.services.entities.EmailBuilder;
-import com.ulises.usersserver.services.entities.User;
-import com.ulises.usersserver.services.entities.UserApp;
+import com.ulises.usersserver.repositories.PasswordRecoveryTokensRepository;
+import com.ulises.usersserver.services.entities.*;
 import com.ulises.usersserver.services.exceptions.NoUserWithEmailException;
 import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
-import com.ulises.usersserver.services.repositories.UserAppRepository;
-import com.ulises.usersserver.services.repositories.UserRepository;
+import com.ulises.usersserver.repositories.UserAppRepository;
+import com.ulises.usersserver.repositories.UserRepository;
 import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,9 +17,10 @@ import javax.ws.rs.InternalServerErrorException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 
 import static com.ulises.usersserver.constants.Constants.ENDPOINT_RECOVER_PASSWORD;
-import static com.ulises.usersserver.constants.Constants.PASSWORD_RECOVERY_EMAIL_BODY;
+import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +28,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private UserAppRepository userAppRepository;
+    @Autowired
+    private PasswordRecoveryTokensRepository passwordRecoveryTokensRepository;
     @Autowired
     private HttpService httpService;
 
@@ -69,6 +70,12 @@ public class UserServiceImpl implements UserService {
 
         if(!this.httpService.checkStatusIsOK(this.httpService.post(ENDPOINT_RECOVER_PASSWORD, email, headers, null).getStatus()))
             throw new InternalServerErrorException();
+        else this.passwordRecoveryTokensRepository.insert(
+                PasswordRecoveryTokenBuilder.builder()
+                    .username(user.getUsername() + USERNAME_CONTEXT_KEY + user.getContext().getName())
+                    .token(Integer.toString(new Random().nextInt((999999 - 100000) + 1) + 100000))
+                    .build()
+            );
     }
 
 

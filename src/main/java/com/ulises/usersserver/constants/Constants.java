@@ -11,6 +11,7 @@ public class Constants {
     public static final String ENDPOINT_USERS = "/users";
     public static final String ENDPOINT_USERS_REGISTER_APP = "/register/app";
     public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL = "/recoverpasswordbyemail";
+    public static final String ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_ENTER = "/recoverpasswordbyemailnew";
     public static final String REQUEST_ERROR_USER_DOESNT_EXIST = "Your information to enter is incorrect. Please, try " +
             "again.";
     public static final String REQUEST_ERROR_EMAIL_ALREADY_EXISTS = "There is someone registered with this email already.";
@@ -26,19 +27,5 @@ public class Constants {
     public enum CONTEXTS {
         ULIAPP
     }
-    public static final String PASSWORD_RECOVERY_EMAIL_BODY = "" +
-            "<html>" +
-            "   <body>" +
-            "       <center>" +
-            "           Hello [USERNAME], you are receiving this email because a password recovery for the account " +
-            "           registered with this email at [CONTEXT] has been " +
-            "           requested. <br><br>To recover your password click on the button below to create a new one." +
-            "           <br><br>" +
-            "           If you haven't requested any password recovery you can just ignore this email." +
-            "           <br><br>" +
-            "           <button type=\"button\">Recover Password</button>" +
-            "       </center>" +
-            "   </body>" +
-            "</html>";
     public static final String ENDPOINT_RECOVER_PASSWORD = "http://localhost:8681/ulises/notificationsserver/notifications/email";
 }

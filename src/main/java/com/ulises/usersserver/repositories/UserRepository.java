@@ -1,4 +1,4 @@
-package com.ulises.usersserver.services.repositories;
+package com.ulises.usersserver.repositories;
 
 import com.ulises.usersserver.services.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,4 +1,4 @@
-package com.ulises.usersserver.services.repositories;
+package com.ulises.usersserver.repositories;
 
 import com.ulises.usersserver.services.entities.Context;
 import com.ulises.usersserver.services.entities.UserApp;

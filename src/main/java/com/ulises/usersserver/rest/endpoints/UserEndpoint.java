@@ -54,4 +54,12 @@ public class UserEndpoint {
         this.userService.recoverPasswordByEmail(this.userMapper.map(form));
         return Response.noContent().build();
     }
+
+    @POST
+    @Path(ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_ENTER)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response recoverPasswordByEmailEnter(@Valid @NotNull(message = REQUEST_ERROR_NULL_BODY) final PasswordEmailRecoveryForm form) {
+        this.userService.recoverPasswordByEmail(this.userMapper.map(form));
+        return Response.noContent().build();
+    }
 }
