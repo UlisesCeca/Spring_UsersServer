@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class UsersServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(UsersServerApplication.class, args);
-	}
+	public static void main(String[] args) {SpringApplication.run(UsersServerApplication.class, args);}
 
 	@Bean
 	public ResourceConfig jerseyConfig() {
@@ -30,6 +28,9 @@ public class UsersServerApplication {
 		resourceConfig.register(NoUserWithEmailExceptionMapper.class);
 		resourceConfig.register(TokenExpiredExceptionMapper.class);
 		resourceConfig.register(TokenNotMatchExceptionMapper.class);
+		resourceConfig.register(UserWithEmailAlreadyExistsExceptionMapper.class);
+		resourceConfig.register(AppDoesntExistExceptionMapper.class);
+		resourceConfig.register(ContextDoesntExistExceptionMapper.class);
 
 		return resourceConfig;
 	}

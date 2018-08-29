@@ -1,6 +1,7 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
 import com.ulises.usersserver.services.exceptions.TokenExpiredException;
+import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

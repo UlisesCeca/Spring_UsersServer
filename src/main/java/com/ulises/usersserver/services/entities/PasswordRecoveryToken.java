@@ -10,11 +10,22 @@ import java.util.Date;
 public class PasswordRecoveryToken {
     @Id
     private String username;
-
     @Indexed(name="expiration", expireAfterSeconds=300)
-    private final Date expiration = new Date();
-
+    private Date expiration;
     private String token;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setExpiration(Date expiration) {
+        this.expiration = expiration;
+    }
 
     public String getUsername() {
         return username;

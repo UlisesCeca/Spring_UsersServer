@@ -3,7 +3,7 @@ package com.ulises.usersserver.services.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmailBuilder {
+public final class EmailBuilder {
     private String to;
     private String from;
     private String subject;
@@ -17,52 +17,54 @@ public class EmailBuilder {
         this.bcc = new ArrayList<>();
     }
 
-    public static EmailBuilder builder() { return new EmailBuilder(); }
+    public static EmailBuilder anEmail() {
+        return new EmailBuilder();
+    }
 
-    public EmailBuilder to(final String to) {
+    public EmailBuilder withTo(String to) {
         this.to = to;
         return this;
     }
 
-    public EmailBuilder from(final String from) {
+    public EmailBuilder withFrom(String from) {
         this.from = from;
         return this;
     }
 
-    public EmailBuilder subject(final String subject) {
+    public EmailBuilder withSubject(String subject) {
         this.subject = subject;
         return this;
     }
 
-    public EmailBuilder body(final String body) {
+    public EmailBuilder withBody(String body) {
         this.body = body;
         return this;
     }
 
-    public EmailBuilder cc(final List<String> cc) {
+    public EmailBuilder withCc(List<String> cc) {
         this.cc = cc;
         return this;
     }
 
-    public EmailBuilder bcc(final List<String> bcc) {
+    public EmailBuilder withBcc(List<String> bcc) {
         this.bcc = bcc;
         return this;
     }
 
-    public EmailBuilder context(final Context context) {
+    public EmailBuilder withContext(Context context) {
         this.context = context;
         return this;
     }
 
     public Email build() {
-        Email entity = new Email();
-        entity.setTo(this.to);
-        entity.setBody(this.body);
-        entity.setSubject(this.subject);
-        entity.setFrom(this.from);
-        entity.setContext(this.context);
-        entity.setCc(this.cc);
-        entity.setBcc(this.bcc);
-        return entity;
+        Email email = new Email();
+        email.setTo(to);
+        email.setFrom(from);
+        email.setSubject(subject);
+        email.setBody(body);
+        email.setCc(cc);
+        email.setBcc(bcc);
+        email.setContext(context);
+        return email;
     }
 }

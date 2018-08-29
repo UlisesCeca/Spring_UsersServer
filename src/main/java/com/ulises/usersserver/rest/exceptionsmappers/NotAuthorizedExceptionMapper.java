@@ -12,7 +12,6 @@ public class NotAuthorizedExceptionMapper implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response, AuthenticationException authException) throws IOException {
-        response.addHeader("Content-Type", "application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().println("");
     }

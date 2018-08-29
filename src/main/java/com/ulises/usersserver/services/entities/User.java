@@ -7,17 +7,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Date;
 import java.util.List;
 
-import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
-
 @Document(collection = "Users")
-public class User {
+public abstract class User {
     @Id
-    protected String internalID;
+    protected String id;
     protected String username;
     protected String password;
     protected List<SimpleGrantedAuthority> role;
     protected Context context;
     protected Date creationDate;
+    protected App app;
     /*private String id;
     private String name;
     private String surname;
@@ -27,17 +26,12 @@ public class User {
     private String phone;
     private String email;*/
 
-
-    public String getInternalID() {
-        return this.username + USERNAME_CONTEXT_KEY + this.context.getName();
+    public String getId() {
+        return id;
     }
 
-    public void setInternalID() {
-        this.internalID = this.username + USERNAME_CONTEXT_KEY + this.context.getName();
-    }
-
-    public void setInternalID(String internalID) {
-        this.internalID = internalID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -80,5 +74,11 @@ public class User {
         this.creationDate = creationDate;
     }
 
+    public App getApp() {
+        return app;
+    }
 
+    public void setApp(App app) {
+        this.app = app;
+    }
 }

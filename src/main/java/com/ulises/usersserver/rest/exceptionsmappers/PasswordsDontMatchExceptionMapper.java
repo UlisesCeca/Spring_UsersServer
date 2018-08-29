@@ -1,6 +1,7 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
 import com.ulises.usersserver.services.exceptions.PasswordsDontMatchException;
+import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -9,9 +10,9 @@ import javax.ws.rs.ext.ExceptionMapper;
 public class PasswordsDontMatchExceptionMapper implements ExceptionMapper<PasswordsDontMatchException> {
     @Override
     public Response toResponse(PasswordsDontMatchException e) {
-        return Response.status(Response.Status.BAD_REQUEST)
+        return Response.status(Response.Status.PRECONDITION_FAILED)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity("")
+                .entity(new JSONObject().put("error", e.getClass().getSimpleName()).toMap())
                 .build();
     }
 }

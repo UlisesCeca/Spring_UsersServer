@@ -1,6 +1,7 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
 import com.ulises.usersserver.services.exceptions.TokenNotMatchException;
+import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -11,7 +12,7 @@ public class TokenNotMatchExceptionMapper implements ExceptionMapper<TokenNotMat
     public Response toResponse(TokenNotMatchException e) {
         return Response.status(Response.Status.BAD_REQUEST)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity("")
+                .entity(new JSONObject().put("error", e.getClass().getSimpleName()).toMap())
                 .build();
     }
 }

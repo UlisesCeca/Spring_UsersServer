@@ -1,6 +1,7 @@
 package com.ulises.usersserver.rest.forms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ulises.usersserver.services.entities.App;
 import com.ulises.usersserver.services.entities.Context;
 import org.hibernate.validator.constraints.Length;
 
@@ -25,8 +26,19 @@ public class PasswordEmailRecoveryForm {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Context context;
 
+    @NotNull(message = "App must not be empty")
+    private App app;
+
     public String getUsername() {
         return username;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 
     public void setUsername(String username) {

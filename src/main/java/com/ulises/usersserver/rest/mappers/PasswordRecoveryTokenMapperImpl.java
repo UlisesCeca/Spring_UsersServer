@@ -9,9 +9,10 @@ import org.springframework.stereotype.Component;
 public class PasswordRecoveryTokenMapperImpl implements PasswordRecoveryTokenMapper{
     @Override
     public PasswordRecoveryToken map(final PasswordEmailRecoveryFinalForm form) {
-        return PasswordRecoveryTokenBuilder.builder()
-                .token(form.getToken())
-                .username(form.getUsername())
+        return PasswordRecoveryTokenBuilder.aPasswordRecoveryToken()
+                .withToken(form.getToken().getToken())
+                .withUser(form.getToken().getUser())
+                //.withUsername(form.getToken().getUser().getInternalID())
                 .build();
     }
 }

@@ -2,69 +2,74 @@ package com.ulises.usersserver.services.entities;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserAppBuilder {
-    private String username;
-    private Date creationDate;
-    private String internalID;
-    private String password;
-    private Context context;
-    private List<SimpleGrantedAuthority> role;
+import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
+
+public final class UserAppBuilder {
+    protected String username;
+    protected String password;
+    protected List<SimpleGrantedAuthority> role;
+    protected Context context;
+    protected Date creationDate;
+    protected App app;
     private String email;
 
-    public static UserAppBuilder builder() {
+    private UserAppBuilder() {
+        this.role = new ArrayList<>();
+    }
+
+    public static UserAppBuilder anUserApp() {
         return new UserAppBuilder();
     }
 
-    public UserAppBuilder username(final String username) {
-        this.username = username;
-        return this;
-    }
-
-    public UserAppBuilder password(final String password) {
-        this.password = password;
-        return this;
-    }
-
-    public UserAppBuilder email(final String email) {
+    public UserAppBuilder withEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public UserAppBuilder role(final List<SimpleGrantedAuthority> role) {
+    public UserAppBuilder withUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public UserAppBuilder withPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public UserAppBuilder withRole(List<SimpleGrantedAuthority> role) {
         this.role = role;
         return this;
     }
 
-    public UserAppBuilder context(final Context context) {
+    public UserAppBuilder withContext(Context context) {
         this.context = context;
         return this;
     }
 
-
-    public UserAppBuilder internalID(final String internalID) {
-        this.internalID = internalID;
-        return this;
-    }
-
-    public UserAppBuilder creationDate(final Date creationDate) {
+    public UserAppBuilder withCreationDate(Date creationDate) {
         this.creationDate = creationDate;
         return this;
     }
 
-
+    public UserAppBuilder withApp(App app) {
+        this.app = app;
+        return this;
+    }
 
     public UserApp build() {
-        final UserApp userApp = new UserApp();
-        userApp.setInternalID(this.internalID);
-        userApp.setUsername(this.username);
-        userApp.setCreationDate(this.creationDate);
-        userApp.setPassword(this.password);
-        userApp.setContext(this.context);
-        userApp.setRole(this.role);
-        userApp.setEmail(this.email);
+        UserApp userApp = new UserApp();
+        userApp.setEmail(email);
+        userApp.setUsername(username);
+        userApp.setPassword(password);
+        userApp.setRole(role);
+        userApp.setContext(context);
+        userApp.setCreationDate(creationDate);
+        userApp.setApp(app);
+        userApp.setId(this.username + USERNAME_CONTEXT_KEY + this.context.getName());
         return userApp;
     }
 }

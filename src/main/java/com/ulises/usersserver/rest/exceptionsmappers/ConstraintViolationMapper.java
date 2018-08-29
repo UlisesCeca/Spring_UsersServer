@@ -1,24 +1,23 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
-import com.ulises.usersserver.rest.dto.ErrorDTO;
-import com.ulises.usersserver.rest.dto.ErrorDTOBuilder;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException> {
     @Override
     public Response toResponse(final ConstraintViolationException exception) {
-        final ErrorDTOBuilder builder = ErrorDTOBuilder.builder();
-        final ErrorDTO errorDTO;
+        List<String> errors = new ArrayList<>();
         for (ConstraintViolation constraintViolation : exception.getConstraintViolations()) {
-            builder.addMessage(constraintViolation.getMessage());
+            errors.add(constraintViolation.getMessage());
         }
-        errorDTO = builder.build();
-        return Response.status(Response.Status.BAD_REQUEST)
-                .entity(errorDTO)
+        return Response.status(Response.Status.PRECONDITION_FAILED)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(errors)
                 .build();
     }
 }

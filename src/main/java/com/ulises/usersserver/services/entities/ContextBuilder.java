@@ -1,18 +1,23 @@
 package com.ulises.usersserver.services.entities;
 
-public class ContextBuilder {
+public final class ContextBuilder {
     private String name;
 
-    public static ContextBuilder builder() { return new ContextBuilder(); }
+    private ContextBuilder() {
+    }
 
-    public ContextBuilder name(final String name) {
+    public static ContextBuilder aContext() {
+        return new ContextBuilder();
+    }
+
+    public ContextBuilder withName(String name) {
         this.name = name;
         return this;
     }
 
     public Context build() {
-        Context entity = new Context();
-        entity.setName(this.name);
-        return entity;
+        Context context = new Context();
+        context.setName(name);
+        return context;
     }
 }

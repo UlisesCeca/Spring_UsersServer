@@ -1,13 +1,8 @@
 package com.ulises.usersserver.services;
 
-import com.ulises.usersserver.repositories.PasswordRecoveryTokensRepository;
+import com.ulises.usersserver.repositories.*;
 import com.ulises.usersserver.services.entities.*;
-import com.ulises.usersserver.services.exceptions.NoUserWithEmailException;
-import com.ulises.usersserver.services.exceptions.TokenExpiredException;
-import com.ulises.usersserver.services.exceptions.TokenNotMatchException;
-import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
-import com.ulises.usersserver.repositories.UserAppRepository;
-import com.ulises.usersserver.repositories.UserRepository;
+import com.ulises.usersserver.services.exceptions.*;
 import org.springframework.http.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,35 +17,44 @@ import java.nio.file.Paths;
 import java.util.Random;
 
 import static com.ulises.usersserver.constants.Constants.ENDPOINT_RECOVER_PASSWORD;
-import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private UserAppRepository userAppRepository;
+    private UserWithEmailRepository userWithEmailRepository;
     @Autowired
     private PasswordRecoveryTokensRepository passwordRecoveryTokensRepository;
+    @Autowired
+    private AppRepository appRepository;
+    @Autowired
+    private ContextsRepository contextsRepository;
     @Autowired
     private HttpService httpService;
 
     @Override
-    public UserApp register(final UserApp user) {
-        if(this.userRepository.existsById(user.getInternalID()))
+    public void register(UserWithEmail user) {
+        Context context = this.contextsRepository.findById(user.getContext().getName()).orElseThrow(ContextDoesntExistException::new);
+        App app = this.appRepository.findById(user.getApp().getName()).orElseThrow(AppDoesntExistException::new);
+
+        user.setApp(app);
+        user.setContext(context);
+
+        if(this.userWithEmailRepository.existsById(user.getId()))
             throw new UserAlreadyExistsException();
-        else
-            this.userRepository.insert(user);
-        return user;
+        else if(this.userWithEmailRepository.existsByContextAndEmail(user.getContext(), user.getEmail()))
+            throw new UserWithEmailAlreadyExistsException();
+        else this.userWithEmailRepository.insert(user);
     }
 
     @Override
-    public void recoverPasswordByEmail(final UserApp user) {
+    public void recoverPasswordByEmail(final UserWithEmail user) {
         Email email;
         HttpHeaders headers;
         String body;
 
-        if(!this.userAppRepository.existsByUsernameAndContextAndEmail(user.getUsername(), user.getContext(), user.getEmail()))
+        if(!this.userWithEmailRepository.existsByUsernameAndContextAndEmail(user.getUsername(), user.getContext(), user.getEmail()))
             throw new NoUserWithEmailException();
 
         try {
@@ -60,23 +64,23 @@ public class UserServiceImpl implements UserService {
         }
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        email = EmailBuilder.builder()
-                .to(user.getEmail())
-                .from(user.getContext().getName() + " <no-reply@" + user.getContext().getName().toLowerCase() + ".com>")
-                .context(user.getContext())
-                .body(body
+        email = EmailBuilder.anEmail()
+                .withTo(user.getEmail())
+                .withFrom(user.getApp().getName() + " <" + user.getApp().getMailDomain() + ">")
+                .withContext(user.getContext())
+                .withBody(body
                         .replace("[USERNAME]", user.getUsername())
                         .replace("[CONTEXT]", user.getContext().getName()))
-                .subject("Password Recovery - " + user.getContext().getName())
+                .withSubject("Password Recovery - " + user.getContext().getName())
                 .build();
 
         if(!this.httpService.checkStatusIsOK(this.httpService.post(ENDPOINT_RECOVER_PASSWORD, email, headers, null).getStatus()))
             throw new InternalServerErrorException();
         else this.passwordRecoveryTokensRepository.insert(
-                PasswordRecoveryTokenBuilder.builder()
-                    .username(user.getUsername() + USERNAME_CONTEXT_KEY + user.getContext().getName())
-                    .token(Integer.toString(new Random().nextInt((999999 - 100000) + 1) + 100000))
-                    .build()
+                        PasswordRecoveryTokenBuilder.aPasswordRecoveryToken()
+                            .withUsername(user.getId())
+                            .withToken(Integer.toString(new Random().nextInt((999999 - 100000) + 1) + 100000))
+                            .build()
             );
     }
 
@@ -94,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findById(username).get();
+        User user = userRepository.findById(username).orElseThrow(UserNotFoundException::new);
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getRole());
     }

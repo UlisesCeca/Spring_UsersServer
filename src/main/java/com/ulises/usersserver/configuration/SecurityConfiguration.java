@@ -1,6 +1,5 @@
 package com.ulises.usersserver.configuration;
 
-import com.ulises.usersserver.constants.Constants;
 import com.ulises.usersserver.rest.exceptionsmappers.NotAuthorizedExceptionMapper;
 import com.ulises.usersserver.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.ulises.usersserver.constants.Constants.ENDPOINT_USERS;
-import static com.ulises.usersserver.constants.Constants.ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL;
-import static com.ulises.usersserver.constants.Constants.ENDPOINT_USERS_REGISTER_APP;
+import static com.ulises.usersserver.constants.Constants.*;
 
 @Configuration
 @EnableWebSecurity
@@ -33,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(ENDPOINT_USERS + ENDPOINT_USERS_REGISTER_APP,
                         ENDPOINT_USERS + ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL)
-                .hasAnyRole(Constants.ROLES.ULIAPP.toString(), Constants.ROLES.ULISES.toString())
+                .hasAnyRole(ROLE_ULISES, ROLE_ULIAPP)
                 .and().httpBasic().authenticationEntryPoint(new NotAuthorizedExceptionMapper())
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

@@ -1,25 +1,46 @@
 package com.ulises.usersserver.services.entities;
 
-public class PasswordRecoveryTokenBuilder {
+import java.util.Date;
+
+public final class PasswordRecoveryTokenBuilder {
     private String username;
+    private Date expiration;
     private String token;
+    private User user;
 
-    public static PasswordRecoveryTokenBuilder builder() {return new PasswordRecoveryTokenBuilder();}
+    private PasswordRecoveryTokenBuilder() {
+    }
 
-    public PasswordRecoveryTokenBuilder username(final String username) {
+    public static PasswordRecoveryTokenBuilder aPasswordRecoveryToken() {
+        return new PasswordRecoveryTokenBuilder();
+    }
+
+    public PasswordRecoveryTokenBuilder withUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public PasswordRecoveryTokenBuilder token(final String token) {
+    public PasswordRecoveryTokenBuilder withExpiration(Date expiration) {
+        this.expiration = expiration;
+        return this;
+    }
+
+    public PasswordRecoveryTokenBuilder withToken(String token) {
         this.token = token;
         return this;
     }
 
+    public PasswordRecoveryTokenBuilder withUser(User user) {
+        this.user = user;
+        return this;
+    }
+
     public PasswordRecoveryToken build() {
-        PasswordRecoveryToken entity = new PasswordRecoveryToken();
-        entity.setUsername(this.username);
-        entity.setToken(this.token);
-        return entity;
+        PasswordRecoveryToken passwordRecoveryToken = new PasswordRecoveryToken();
+        passwordRecoveryToken.setUsername(username);
+        passwordRecoveryToken.setExpiration(expiration);
+        passwordRecoveryToken.setToken(token);
+        passwordRecoveryToken.setUser(user);
+        return passwordRecoveryToken;
     }
 }

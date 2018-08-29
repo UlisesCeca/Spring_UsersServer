@@ -1,6 +1,7 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 
 import com.ulises.usersserver.services.exceptions.IDAlreadyExistsException;
+import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -12,7 +13,7 @@ public class IDAlreadyExistsExceptionMapper implements ExceptionMapper<IDAlready
     public Response toResponse(IDAlreadyExistsException e) {
         return Response.status(Response.Status.BAD_REQUEST)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity("")
+                .entity(new JSONObject().put("error", e.getClass().getSimpleName()).toMap())
                 .build();
     }
 }
