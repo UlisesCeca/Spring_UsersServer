@@ -8,7 +8,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException> {
+public final class ConstraintViolationMapper implements ExceptionMapper<ConstraintViolationException> {
     @Override
     public Response toResponse(final ConstraintViolationException exception) {
         List<String> errors = new ArrayList<>();

@@ -1,40 +1,47 @@
 package com.ulises.usersserver.rest.mappers;
 
 import com.ulises.usersserver.rest.forms.RegistrationAppForm;
-import com.ulises.usersserver.services.entities.AppBuilder;
-import com.ulises.usersserver.services.entities.ContextBuilder;
-import com.ulises.usersserver.services.entities.UserApp;
-import com.ulises.usersserver.services.entities.UserAppBuilder;
+import com.ulises.usersserver.services.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.ulises.usersserver.constants.Constants.*;
 
 
 @Component
-public class UserAppMapperImpl implements UserAppMapper {
+public final class UserAppMapperImpl implements UserAppMapper {
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    UserAppMapperImpl(final PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserApp map(final RegistrationAppForm form) {
-        return UserAppBuilder.anUserApp()
+        UserApp user = UserAppBuilder.anUserApp()
                 .withUsername(form.getUsername())
                 .withPassword(this.passwordEncoder.encode(form.getPassword()))
                 .withEmail(form.getEmail())
                 .withApp(AppBuilder.anApp()
-                    .withName(APP_NAME_ULIAPP)
-                    .build())
+                        .withName(APP_NAME_ULIAPP)
+                        .build())
                 .withContext(ContextBuilder.aContext()
-                    .withName(CONTEXT_NAME_ULIAPP)
-                    .build())
-                .withRole(Arrays.asList(new SimpleGrantedAuthority(ROLE_PREFIX + ROLE_ULISES)))
+                        .withName(CONTEXT_NAME_ULIAPP)
+                        .build())
                 .withCreationDate(new Date())
                 .build();
+        Role role = RoleBuilder.aRole()
+                .withRole((ROLE_PREFIX + ROLE_ULISES))
+                .withUser(user)
+                .build();
+        user.getRoles().add(role);
+
+        return user;
     }
 }

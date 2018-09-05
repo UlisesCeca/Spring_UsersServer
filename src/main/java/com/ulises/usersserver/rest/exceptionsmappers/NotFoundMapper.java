@@ -5,7 +5,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class NotFoundMapper implements ExceptionMapper<NotFoundException> {
+public final class NotFoundMapper implements ExceptionMapper<NotFoundException> {
     @Override
     public Response toResponse(NotFoundException e) {
         return Response.status(Response.Status.NOT_FOUND)

@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(ENDPOINT_USERS + ENDPOINT_USERS_REGISTER_APP,
-                        ENDPOINT_USERS + ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL)
+                        ENDPOINT_USERS + ENDPOINT_USERS_FORGOT_PASSWORD_BY_EMAIL_1)
                 .hasAnyRole(ROLE_ULISES, ROLE_ULIAPP)
                 .and().httpBasic().authenticationEntryPoint(new NotAuthorizedExceptionMapper())
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

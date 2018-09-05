@@ -1,4 +1,4 @@
 package com.ulises.usersserver.services.exceptions;
 
-public class UserAlreadyExistsException extends RuntimeException{
+public final class UserAlreadyExistsException extends RuntimeException{
 }

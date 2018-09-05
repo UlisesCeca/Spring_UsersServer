@@ -1,49 +1,30 @@
 package com.ulises.usersserver.services.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-@Document(collection = "PasswordRecoveryTokens")
-public class PasswordRecoveryToken {
+@Entity
+@Table(name = "password_recovery_tokens")
+@ToString @EqualsAndHashCode @Getter @Setter
+public final class PasswordRecoveryToken implements Serializable {
     @Id
-    private String username;
-    @Indexed(name="expiration", expireAfterSeconds=300)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private UserWithEmail user;
+
+    @Column(nullable = false)
     private Date expiration;
-    private String token;
-    private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setExpiration(Date expiration) {
-        this.expiration = expiration;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getExpiration() {
-        return expiration;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    @Column(nullable = false)
+    private Integer token;
 }

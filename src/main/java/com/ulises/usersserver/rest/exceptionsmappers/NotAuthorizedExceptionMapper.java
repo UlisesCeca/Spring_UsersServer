@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class NotAuthorizedExceptionMapper implements AuthenticationEntryPoint {
+public final class NotAuthorizedExceptionMapper implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response, AuthenticationException authException) throws IOException {

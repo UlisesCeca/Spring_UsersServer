@@ -1,4 +1,4 @@
 package com.ulises.usersserver.services.exceptions;
 
-public class TokenExpiredException extends RuntimeException{
+public final class TokenExpiredException extends RuntimeException{
 }

@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class UserWithEmailAlreadyExistsExceptionMapper implements ExceptionMapper<UserWithEmailAlreadyExistsException> {
+public final class UserWithEmailAlreadyExistsExceptionMapper implements ExceptionMapper<UserWithEmailAlreadyExistsException> {
     @Override
     public Response toResponse(UserWithEmailAlreadyExistsException e) {
         return Response.status(Response.Status.BAD_REQUEST)

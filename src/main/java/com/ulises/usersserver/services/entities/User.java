@@ -1,23 +1,62 @@
 package com.ulises.usersserver.services.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import javax.persistence.Id;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "Users")
-public abstract class User {
+@Entity
+@Table(name = "users")
+@Inheritance(strategy= InheritanceType.JOINED)
+@EqualsAndHashCode @Getter @Setter
+public class User {
     @Id
     protected String id;
+
+    @Column(nullable = false)
     protected String username;
+
+    @Column(nullable = false)
     protected String password;
-    protected List<SimpleGrantedAuthority> role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    protected List<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "context", nullable = false)
     protected Context context;
+
+    @Column(nullable = false)
     protected Date creationDate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "app", nullable = false)
     protected App app;
-    /*private String id;
+
+    User() {
+        this.roles = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", context=" + context +
+                ", creationDate=" + creationDate +
+                ", app=" + app +
+                '}';
+    }
+
+    /*private String dni;
     private String name;
     private String surname;
     private int age;
@@ -26,59 +65,4 @@ public abstract class User {
     private String phone;
     private String email;*/
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<SimpleGrantedAuthority> getRole() {
-        return this.role;
-    }
-
-    public void setRole(List<SimpleGrantedAuthority> role) {
-        this.role = role;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public Context getContext() {
-        return context;
-    }
-
-    public Date getCreationDate() {
-        return this.creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public App getApp() {
-        return app;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
-    }
 }

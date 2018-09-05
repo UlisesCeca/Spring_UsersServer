@@ -1,4 +1,4 @@
 package com.ulises.usersserver.services.exceptions;
 
-public class UserNotFoundException extends RuntimeException{
+public final class UserNotFoundException extends RuntimeException{
 }

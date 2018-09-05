@@ -1,4 +1,4 @@
 package com.ulises.usersserver.services.exceptions;
 
-public class TokenNotMatchException extends RuntimeException{
+public final class TokenNotMatchException extends RuntimeException{
 }

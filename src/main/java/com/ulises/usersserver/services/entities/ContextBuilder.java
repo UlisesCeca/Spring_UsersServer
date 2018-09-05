@@ -3,9 +3,6 @@ package com.ulises.usersserver.services.entities;
 public final class ContextBuilder {
     private String name;
 
-    private ContextBuilder() {
-    }
-
     public static ContextBuilder aContext() {
         return new ContextBuilder();
     }
@@ -17,7 +14,7 @@ public final class ContextBuilder {
 
     public Context build() {
         Context context = new Context();
-        context.setName(name);
+        context.setName(this.name);
         return context;
     }
 }

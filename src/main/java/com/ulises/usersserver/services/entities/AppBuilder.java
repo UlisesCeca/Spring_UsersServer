@@ -1,17 +1,9 @@
 package com.ulises.usersserver.services.entities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public final class AppBuilder {
     private String name;
     private String web;
     private String mailDomain;
-    private Map<String, String> rrss;
-
-    private AppBuilder() {
-        this.rrss = new HashMap<>();
-    }
 
     public static AppBuilder anApp() {
         return new AppBuilder();
@@ -32,17 +24,11 @@ public final class AppBuilder {
         return this;
     }
 
-    public AppBuilder withRrss(Map<String, String> rrss) {
-        this.rrss = rrss;
-        return this;
-    }
-
     public App build() {
         App app = new App();
-        app.setName(name);
-        app.setWeb(web);
-        app.setMailDomain(mailDomain);
-        app.setRrss(rrss);
+        app.setName(this.name);
+        app.setWeb(this.web);
+        app.setMailDomain(this.mailDomain);
         return app;
     }
 }

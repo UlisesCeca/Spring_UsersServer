@@ -1,7 +1,5 @@
 package com.ulises.usersserver.services.entities;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,12 +7,12 @@ import java.util.List;
 import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
 
 public final class UserWithEmailBuilder {
-    protected String username;
-    protected String password;
-    protected List<SimpleGrantedAuthority> role;
-    protected Context context;
-    protected Date creationDate;
-    protected App app;
+    private String username;
+    private String password;
+    private List<Role> role;
+    private Context context;
+    private Date creationDate;
+    private App app;
     private String email;
 
     private UserWithEmailBuilder() {
@@ -40,7 +38,7 @@ public final class UserWithEmailBuilder {
         return this;
     }
 
-    public UserWithEmailBuilder withRole(List<SimpleGrantedAuthority> role) {
+    public UserWithEmailBuilder withRole(List<Role> role) {
         this.role = role;
         return this;
     }
@@ -62,13 +60,13 @@ public final class UserWithEmailBuilder {
 
     public UserWithEmail build() {
         UserWithEmail userWithEmail = new UserWithEmail();
-        userWithEmail.setEmail(email);
-        userWithEmail.setUsername(username);
-        userWithEmail.setPassword(password);
-        userWithEmail.setRole(role);
-        userWithEmail.setContext(context);
-        userWithEmail.setCreationDate(creationDate);
-        userWithEmail.setApp(app);
+        userWithEmail.setEmail(this.email);
+        userWithEmail.setUsername(this.username);
+        userWithEmail.setPassword(this.password);
+        userWithEmail.setRoles(this.role);
+        userWithEmail.setContext(this.context);
+        userWithEmail.setCreationDate(this.creationDate);
+        userWithEmail.setApp(this.app);
         userWithEmail.setId(this.username + USERNAME_CONTEXT_KEY + this.context.getName());
         return userWithEmail;
     }

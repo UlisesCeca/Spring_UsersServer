@@ -1,13 +1,12 @@
 package com.ulises.usersserver.rest.exceptionsmappers;
 import com.ulises.usersserver.services.exceptions.UserAlreadyExistsException;
 import org.json.JSONObject;
-import org.springframework.util.StringUtils;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class UserAlreadyExistsExceptionMapper implements ExceptionMapper<UserAlreadyExistsException> {
+public final class UserAlreadyExistsExceptionMapper implements ExceptionMapper<UserAlreadyExistsException> {
     @Override
     public Response toResponse(UserAlreadyExistsException e) {
         System.out.println();

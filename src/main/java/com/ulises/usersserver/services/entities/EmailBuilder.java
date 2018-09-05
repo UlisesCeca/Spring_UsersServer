@@ -58,13 +58,13 @@ public final class EmailBuilder {
 
     public Email build() {
         Email email = new Email();
-        email.setTo(to);
-        email.setFrom(from);
-        email.setSubject(subject);
-        email.setBody(body);
-        email.setCc(cc);
-        email.setBcc(bcc);
-        email.setContext(context);
+        email.setTo(this.to);
+        email.setFrom(this.from);
+        email.setSubject(this.subject);
+        email.setBody(this.body);
+        email.setCc(this.cc);
+        email.setBcc(this.bcc);
+        email.setContext(this.context);
         return email;
     }
 }

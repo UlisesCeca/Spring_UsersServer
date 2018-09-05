@@ -1,4 +1,4 @@
 package com.ulises.usersserver.services.exceptions;
 
-public class PasswordsDontMatchException extends RuntimeException{
+public final class PasswordsDontMatchException extends RuntimeException{
 }

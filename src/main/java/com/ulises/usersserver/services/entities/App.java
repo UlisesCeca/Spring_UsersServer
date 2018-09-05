@@ -1,48 +1,41 @@
 package com.ulises.usersserver.services.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Map;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Document(collection = "Apps")
-public class App {
+@Entity
+@Table(name = "apps")
+@EqualsAndHashCode @Getter @Setter
+public final class App {
     @Id
+    @Column(length = 15)
     private String name;
+
+    @Column(length = 40)
     private String web;
+
+    @Column(length = 50)
     private String mailDomain;
-    private Map<String, String> rrss;
 
+    @OneToMany(mappedBy = "app", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SocialNetwork> socialNetworks;
 
-    public String getWeb() {
-        return web;
+    App() {
+        this.socialNetworks = new ArrayList<>();
     }
 
-    public void setWeb(String web) {
-        this.web = web;
-    }
-
-    public String getMailDomain() {
-        return mailDomain;
-    }
-
-    public void setMailDomain(String mailDomain) {
-        this.mailDomain = mailDomain;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Map<String, String> getRrss() {
-        return rrss;
-    }
-
-    public void setRrss(Map<String, String> rrss) {
-        this.rrss = rrss;
+    @Override
+    public String toString() {
+        return "App{" +
+                "name='" + name + '\'' +
+                ", web='" + web + '\'' +
+                ", mailDomain='" + mailDomain + '\'' +
+                ", socialNetworks=" + socialNetworks +
+                '}';
     }
 }

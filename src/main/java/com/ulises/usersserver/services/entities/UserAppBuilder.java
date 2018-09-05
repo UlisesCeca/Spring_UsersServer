@@ -1,7 +1,5 @@
 package com.ulises.usersserver.services.entities;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,17 +7,15 @@ import java.util.List;
 import static com.ulises.usersserver.constants.Constants.USERNAME_CONTEXT_KEY;
 
 public final class UserAppBuilder {
-    protected String username;
-    protected String password;
-    protected List<SimpleGrantedAuthority> role;
-    protected Context context;
-    protected Date creationDate;
-    protected App app;
+    private String username;
+    private String password;
+    private List<Role> role;
+    private Context context;
+    private Date creationDate;
+    private App app;
     private String email;
 
-    private UserAppBuilder() {
-        this.role = new ArrayList<>();
-    }
+    private UserAppBuilder() { this.role = new ArrayList<>(); }
 
     public static UserAppBuilder anUserApp() {
         return new UserAppBuilder();
@@ -40,7 +36,7 @@ public final class UserAppBuilder {
         return this;
     }
 
-    public UserAppBuilder withRole(List<SimpleGrantedAuthority> role) {
+    public UserAppBuilder withRole(List<Role> role) {
         this.role = role;
         return this;
     }
@@ -62,13 +58,13 @@ public final class UserAppBuilder {
 
     public UserApp build() {
         UserApp userApp = new UserApp();
-        userApp.setEmail(email);
-        userApp.setUsername(username);
-        userApp.setPassword(password);
-        userApp.setRole(role);
-        userApp.setContext(context);
-        userApp.setCreationDate(creationDate);
-        userApp.setApp(app);
+        userApp.setEmail(this.email);
+        userApp.setUsername(this.username);
+        userApp.setPassword(this.password);
+        userApp.setRoles(this.role);
+        userApp.setContext(this.context);
+        userApp.setCreationDate(this.creationDate);
+        userApp.setApp(this.app);
         userApp.setId(this.username + USERNAME_CONTEXT_KEY + this.context.getName());
         return userApp;
     }

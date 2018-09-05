@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
-public class PasswordsDontMatchExceptionMapper implements ExceptionMapper<PasswordsDontMatchException> {
+public final class PasswordsDontMatchExceptionMapper implements ExceptionMapper<PasswordsDontMatchException> {
     @Override
     public Response toResponse(PasswordsDontMatchException e) {
         return Response.status(Response.Status.PRECONDITION_FAILED)
